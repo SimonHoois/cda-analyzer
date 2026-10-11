@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: cda-lab
+    runtime: docker
+    plan: free             # free plan: uploaded rides and history are lost on every restart or redeploy
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: APP_PASSWORD  # set this in the Render dashboard; the username is "cda"
+        sync: false
+      - key: DATA_DIR
+        value: /var/data
+# For permanent storage: change plan to "starter" and add
+#   disk:
+#     name: cda-data
+#     mountPath: /var/data
+#     sizeGB: 1
